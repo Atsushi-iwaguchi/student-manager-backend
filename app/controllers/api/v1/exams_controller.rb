@@ -6,7 +6,7 @@ class Api::V1::ExamsController < ApplicationController
     if current_user.teacher?
       exams = Exam.all.includes(:user, :exam_results)
     else
-      exams = current_user.exam.includes(:exam_results)
+      exams = current_user.exams.includes(:exam_results)
     end
     render json: exams, include: { exam_results: {} }
   end

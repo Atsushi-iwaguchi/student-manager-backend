@@ -4,6 +4,8 @@ class User < ApplicationRecord
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
     validates :password, length: { minimum: 6 }, if: -> { new_record? || !password.nil? }
 
+    enum :role, { student: 0, teacher: 1 }
+
     has_many :exams, dependent: :destroy
     has_many :exam_results, through: :exams
 

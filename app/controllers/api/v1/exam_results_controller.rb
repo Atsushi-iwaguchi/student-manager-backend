@@ -1,13 +1,13 @@
 class Api::V1::ExamResultsController < ApplicationController
   before_action :authenticate_user!
-  before action :set_exam_result, only: [:update, :destroy]
+  before_action :set_exam_result, only: [:update, :destroy]
 
   def create
     exam = Exam.find(params[:exam_id])
     exam_result = exam.exam_results.build(exam_result_params)
 
     if exam_result.save
-      render json: exam_result status: :create
+      render json: exam_result, status: :created
     else
       render json: { errors: exam_result.errors.full_messages }, status: :unprocessable_entity
     end
@@ -16,6 +16,8 @@ class Api::V1::ExamResultsController < ApplicationController
   def update
     if @exam_result.update(exam_result_params)
       render json: @exam_result
+    else
+      render json: { errors: @exam_result.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
