@@ -23,14 +23,14 @@ class ApplicationController < ActionController::API
         authenticate_with_http_token do |token, options|
             begin
                 #JWT.decodeでトークンを検証, デコード
-                decoded = JWT.decoded(
+                decoded = JWT.decode(
                     token,
                     Rails.application.credentials.secret_key_base,
                     true,
                     { algorithm: 'HS256' }
                 )
                 user_id = decoded[0]["sub"]
-                User.find(user.id) #取り出したuser.idでDBからユーザーを検索しcurrent_userの返り値となる
+                User.find(user_id) #取り出したuser.idでDBからユーザーを検索しcurrent_userの返り値となる
               rescue JWT::DecodeError, JWT::ExpiredSignature, ActiveRecord::RecordNotFound
                 nil
             end

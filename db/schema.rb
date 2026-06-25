@@ -10,9 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_24_122447) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_25_015114) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "exam_results", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.float "deviation"
+    t.bigint "exam_id", null: false
+    t.integer "score"
+    t.string "subject"
+    t.datetime "updated_at", null: false
+    t.index ["exam_id"], name: "index_exam_results_on_exam_id"
+  end
+
+  create_table "exams", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.date "exam_date"
+    t.string "exam_name"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_exams_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -24,4 +43,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_24_122447) do
     t.string "target_school"
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "exam_results", "exams"
+  add_foreign_key "exams", "users"
 end
