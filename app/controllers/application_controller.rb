@@ -25,7 +25,7 @@ class ApplicationController < ActionController::API
                 #JWT.decodeでトークンを検証, デコード
                 decoded = JWT.decode(
                     token,
-                    Rails.application.credentials.secret_key_base,
+                    Rails.application.secret_key_base,
                     true,
                     { algorithm: 'HS256' }
                 )

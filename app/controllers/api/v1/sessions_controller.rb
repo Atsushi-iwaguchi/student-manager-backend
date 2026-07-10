@@ -20,6 +20,6 @@ class Api::V1::SessionsController < ApplicationController
   private
   def generate_token(user)
     payload = user.to_token_payload
-    JWT.encode(payload, Rails.application.credentials.secret_key_base, 'HS256')
+    JWT.encode(payload, Rails.application.secret_key_base, 'HS256')
   end
 end

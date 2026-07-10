@@ -21,7 +21,7 @@ class Api::V1::UsersController < ApplicationController
     #user.to_token_payloadでペイロードを取得してJWT.encodeで秘密鍵を使って署名エンコードしてトークン文字列を生成
     def generate_token(user)
         payload = user.to_token_payload
-        JWT.encode(payload, Rails.application.credentials.secret_key_base, 'HS256')
+        JWT.encode(payload, Rails.application.secret_key_base, 'HS256')
     end
 
 end
