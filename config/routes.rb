@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         resources :exams, only: [:index, :create, :show, :destroy] do
           resources :exam_results, only: [:create]
         end
+        resources :interview_records, only: [:index, :create, :show, :destroy]
       end
 
       resources :exams, only: [] do

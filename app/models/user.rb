@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
     has_many :exams, dependent: :destroy
     has_many :exam_results, through: :exams
+    has_many :interview_records, dependent: :destroy
 
     # JWTトークン用にユーザー情報をペイロードに変換
     def to_token_payload

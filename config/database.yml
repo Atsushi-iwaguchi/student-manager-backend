@@ -20,13 +20,13 @@ production:
     url: <%= ENV['DATABASE_URL'] %>
   cache:
     <<: *default
-    url: <%= ENV['DATABASE_URL'].gsub('student_manager_backend_production', 'student_manager_backend_production_cache') %>
+    database: student_manager_backend_production_cache
     migrations_paths: db/cache_migrate
   queue:
     <<: *default
-    url: <%= ENV['DATABASE_URL'].gsub('student_manager_backend_production', 'student_manager_backend_production_queue') %>
+    database: student_manager_backend_production_queue
     migrations_paths: db/queue_migrate
   cable:
     <<: *default
-    url: <%= ENV['DATABASE_URL'].gsub('student_manager_backend_production', 'student_manager_backend_production_cable') %>
+    database: student_manager_backend_production_cable
     migrations_paths: db/cable_migrate
